@@ -1,0 +1,55 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Recommendation System</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Movie Recommendation Engine</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="movie-picker">
+            <h2>Movie Picker</h2>
+            <form action="/recommend" method="POST">
+                <label for="genre">Choose a genre:</label>
+                <select name="genre" id="genre">
+                    {% for genre in genres %}
+                        <option value="{{ genre }}">{{ genre }}</option>
+                    {% endfor %}
+                </select>
+
+                <label for="recency">How recent should the movie be?</label>
+                <select name="recency" id="recency">
+                    <option value="all">All time</option>
+                    <option value="recent">Last 10 years</option>
+                </select>
+
+                <button type="submit">Find a Movie</button>
+            </form>
+        </section>
+
+        <section id="top-genres">
+            <h2>Top Genres</h2>
+            <ul>
+                {% for genre in genres %}
+                    <li><a href="/recommend?genre={{ genre }}">{{ genre }}</a></li>
+                {% endfor %}
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        © 2024 Princess Sopeju
+    </footer>
+</body>
+</html>
